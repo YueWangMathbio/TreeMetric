@@ -12,7 +12,7 @@ T1 and T2 should be perfect binary trees with depth n. If not, add null
 children vertices with label 'n' to verticies with depth <n and have 
 less than two children. 
 The trees are recorded by their labels, in the order of depth-first search.
-For example, consider a tree T="abcdefg" with depth 3. 
+For example, consider a tree T="abcdefg" with depth 2. 
 It means the root has label 'a'; two children of 'a' are 'b' and 'e'; 
 two children of 'b' are 'c' and 'd'; two children of 'e' are 'f' and 'g'.
 
@@ -43,7 +43,7 @@ def compare(T1,T2): # compare the label strings for two trees
 def transform(n,T): # replace alphabetical labels by number labels
 # n is the depth of the tree T
 # this assigns a total order on the label set
-    m=2**n-1    
+    m=2**(n+1)-1    
     newT=[]
     for x in range(0, m):
         if T[x]=='z':
@@ -62,11 +62,11 @@ def transform(n,T): # replace alphabetical labels by number labels
 
 def regular(n,T): # transform a tree into its left-regular form
 # n is the depth of the tree T
-    if n==1:
-        return T[:] # a tree of depth 1 is already left-regularized
+    if n==0:
+        return T[:] # a tree of depth 0 is already left-regularized
     else:
         newT=[]
-        m=2**(n-1)-1 
+        m=2**n-1 
         TL=regular(n-1,T[1:m+1])
         TR=regular(n-1,T[m+1:2*m+1]) 
         # left-regularize both subtrees of the root
@@ -95,17 +95,17 @@ def LR(n,T1,T2): # calculate the D_LR: left-regularize two trees
 T1="xxxyxxy"
 T2="yyxyyxy"
 T3="zzxxzyy"
-print('D_LR(T1,T2)=',LR(3,T1,T2))
-print('D_LR(T1,T3)=',LR(3,T1,T3))
-print('D_LR(T2,T3)=',LR(3,T2,T3))
+print('D_LR(T1,T2)=',LR(2,T1,T2))
+print('D_LR(T1,T3)=',LR(2,T1,T3))
+print('D_LR(T2,T3)=',LR(2,T2,T3))
 print('')
 
 T4="xxxnnnn"
 T5="xyynnnn"
 T6="xzzzzzz"
-print('D_LR(T4,T5)=',LR(3,T4,T5))
-print('D_LR(T4,T6)=',LR(3,T4,T6))
-print('D_LR(T5,T6)=',LR(3,T5,T6))
+print('D_LR(T4,T5)=',LR(2,T4,T5))
+print('D_LR(T4,T6)=',LR(2,T4,T6))
+print('D_LR(T5,T6)=',LR(2,T5,T6))
 print('')
 
 T7="zxnnnnnnnnnnnnnnyzxnnynnnnnnnnn"
@@ -114,18 +114,18 @@ T9="xynnnnnnnnnnnnnnzxxnnxnnnnnnnnn"
 T10="zznnnnnnnnnnnnnnyzxnnynnnnnnnnn"
 T11="xnnnnnnnnnnnnnnnzxnnnnnnyzxynnn"
 
-print('D_LR(T7,T8)=',LR(5,T7,T8))
-print('D_LR(T7,T9)=',LR(5,T7,T9))
-print('D_LR(T7,T10)=',LR(5,T7,T10))
-print('D_LR(T7,T11)=',LR(5,T7,T11))
-print('D_LR(T8,T9)=',LR(5,T8,T9))
-print('D_LR(T8,T10)=',LR(5,T8,T10))
-print('D_LR(T8,T11)=',LR(5,T8,T11))
-print('D_LR(T9,T10)=',LR(5,T9,T10))
-print('D_LR(T9,T11)=',LR(5,T9,T11))
-print('D_LR(T10,T11)=',LR(5,T10,T11))
+print('D_LR(T7,T8)=',LR(4,T7,T8))
+print('D_LR(T7,T9)=',LR(4,T7,T9))
+print('D_LR(T7,T10)=',LR(4,T7,T10))
+print('D_LR(T7,T11)=',LR(4,T7,T11))
+print('D_LR(T8,T9)=',LR(4,T8,T9))
+print('D_LR(T8,T10)=',LR(4,T8,T10))
+print('D_LR(T8,T11)=',LR(4,T8,T11))
+print('D_LR(T9,T10)=',LR(4,T9,T10))
+print('D_LR(T9,T11)=',LR(4,T9,T11))
+print('D_LR(T10,T11)=',LR(4,T10,T11))
 print('')
 
 TA="wxwwwwwwzzsszzz"
 TS="xxwxxwxxxwwwwww"
-print('D_LR(TA,TS)=',LR(4,TA,TS))
+print('D_LR(TA,TS)=',LR(3,TA,TS))
